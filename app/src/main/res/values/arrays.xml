@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="heading_note">
+        <item>Что купить?</item>
+        <item>Важное</item>
+        <item>Не смотреть</item>
+    </string-array>
+
+    <string-array name="description_note">
+        <item>Молоко, хлеб, к чаю</item>
+        <item>Тут расписан roadMap</item>
+        <item>Что-то я плохо понимаю эту тему</item>
+    </string-array>
+</resources>
