@@ -1,5 +1,7 @@
 package com.example.hwnotes;
 
+import android.annotation.SuppressLint;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,50 +18,34 @@ import android.view.ViewGroup;
  */
 public class DescriptionNoteFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    protected static final String ARG_INDEX = "index";
+    private int index;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static DescriptionNoteFragment newInstance(int index) {
+        DescriptionNoteFragment frag = new DescriptionNoteFragment();
 
-    public DescriptionNoteFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DescriptionNoteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DescriptionNoteFragment newInstance(String param1, String param2) {
-        DescriptionNoteFragment fragment = new DescriptionNoteFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        args.putInt(ARG_INDEX, index);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            index = getArguments().getInt(ARG_INDEX);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_description_note, container, false);
+        View view = inflater.inflate(R.layout.fragment_description_note, container, false);
+        TextView textViewDescriptionNote = view.findViewById(R.id.descriptionNote);
+        TypedArray textDescriptionNote = getResources().obtainTypedArray(R.array.description_note);
+        textViewDescriptionNote.setText(textDescriptionNote.getText(index));
+        textViewDescriptionNote.setTextSize(30);
+        return view;
     }
 }
