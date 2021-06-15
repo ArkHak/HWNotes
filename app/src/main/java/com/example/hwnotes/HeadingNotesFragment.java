@@ -1,6 +1,8 @@
 package com.example.hwnotes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +25,8 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class HeadingNotesFragment extends Fragment {
+
+    private boolean isLandscape;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +61,38 @@ public class HeadingNotesFragment extends Fragment {
         }
     }
 
-    private void showDescriptionNote(int index) {
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        isLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (isLandscape){
+            showLandDescriptionNote(0);
+        }
+    }
+
+    private void showDescriptionNote(int index){
+        if (isLandscape){
+            showLandDescriptionNote(index);
+        } else {
+            showPortDescriptionNote(index);
+        }
+    }
+
+    private void showLandDescriptionNote(int index) {
+        DescriptionNoteFragment detail = DescriptionNoteFragment.newInstance(index);
+
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.description_note, detail);
+
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.commit();
+    }
+
+    private void showPortDescriptionNote(int index) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), DescriptionNoteActivity.class);
         intent.putExtra(DescriptionNoteFragment.ARG_INDEX, index);
