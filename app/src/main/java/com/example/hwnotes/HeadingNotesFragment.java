@@ -19,13 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HeadingNotesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HeadingNotesFragment extends Fragment {
 
+    public static final String CURRENT_NOTE = "CurrentNote";
+    private int currentPosition = 0;
     private boolean isLandscape;
 
     @Override
@@ -52,11 +50,9 @@ public class HeadingNotesFragment extends Fragment {
             noteEditText.setTextSize(30);
             layoutView.addView(noteEditText);
             final int fi = i;
-            noteEditText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDescriptionNote(fi);
-                }
+            noteEditText.setOnClickListener(v -> {
+                currentPosition = fi;
+                showDescriptionNote(currentPosition);
             });
         }
     }
@@ -67,17 +63,31 @@ public class HeadingNotesFragment extends Fragment {
 
         isLandscape = getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE;
-
-        if (isLandscape){
-            showLandDescriptionNote(0);
-        }
     }
 
-    private void showDescriptionNote(int index){
-        if (isLandscape){
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(CURRENT_NOTE, currentPosition);
+        super.onSaveInstanceState(outState);
+    }
+
+
+    private void showDescriptionNote(int index) {
+        if (isLandscape) {
             showLandDescriptionNote(index);
         } else {
             showPortDescriptionNote(index);
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getInt(CURRENT_NOTE, 0);
+        }
+        if (isLandscape){
+            showLandDescriptionNote(currentPosition);
         }
     }
 
