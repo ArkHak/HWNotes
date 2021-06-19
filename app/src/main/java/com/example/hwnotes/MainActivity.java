@@ -2,8 +2,8 @@ package com.example.hwnotes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements DescriptionNotesFragment.Controller, NotesListFragment.Controller {
 
@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements DescriptionNotesF
                 .commit();
     }
 
-
     @Override
     public void saveNote(NotesEntity note) {
         //todo
@@ -26,9 +25,11 @@ public class MainActivity extends AppCompatActivity implements DescriptionNotesF
 
     @Override
     public void openDescriptionNote(NotesEntity notesEntity) {
+        boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, DescriptionNotesFragment.newInstance(notesEntity))
+                .replace(isLandscape ? R.id.description_note_container : R.id.container, DescriptionNotesFragment.newInstance(notesEntity))
+                .addToBackStack(null)
                 .commit();
     }
 }

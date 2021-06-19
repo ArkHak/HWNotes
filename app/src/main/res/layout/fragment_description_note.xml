@@ -12,8 +12,6 @@
         android:id="@+id/title_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="ssss"
         android:textSize="38sp" />
 
     <TextView
@@ -24,8 +22,8 @@
 
     <Button
         android:id="@+id/save_change_note_button"
-        android:text="Сохранить изменения"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Сохранить изменения" />
 
 </LinearLayout>
