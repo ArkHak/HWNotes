@@ -3,22 +3,32 @@ package com.example.hwnotes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-    private NotesEntity note1 = new NotesEntity("Запись 1", "Сделать дз за 6 и 7 уроки");
-
+public class MainActivity extends AppCompatActivity implements DescriptionNotesFragment.Controller, NotesListFragment.Controller {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.show_fragment_button).setOnClickListener( v -> {
-            DescriptionNotesFragment descriptionNotesFragment = new DescriptionNotesFragment(note1);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragment_container, descriptionNotesFragment)
-                    .commit();
-        });
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, new NotesListFragment())
+                .commit();
+    }
+
+
+    @Override
+    public void saveNote(NotesEntity note) {
+        //todo
+    }
+
+    @Override
+    public void openDescriptionNote(NotesEntity notesEntity) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, DescriptionNotesFragment.newInstance(notesEntity))
+                .commit();
     }
 }

@@ -22,4 +22,10 @@
         android:layout_height="wrap_content"
         android:textSize="26sp" />
 
+    <Button
+        android:id="@+id/save_change_note_button"
+        android:text="Сохранить изменения"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
