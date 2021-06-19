@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="com.example.hwnotes.HeadingNotesFragment"
+    <fragment android:name="com.example.hwnotes.DescriptionNotesFragment"
         android:id="@+id/notes"
         android:layout_width="0px"
         android:layout_height="match_parent"
