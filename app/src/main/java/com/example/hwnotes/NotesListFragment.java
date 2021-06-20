@@ -26,7 +26,7 @@ public class NotesListFragment extends Fragment {
 
     private void addNotesToList(NotesEntity notesEntity) {
         Button button = new Button(getContext());
-        button.setText(notesEntity.toString());
+        button.setText(notesEntity.getTitle());
         button.setOnClickListener(v -> {
             ((Controller) getActivity()).openDescriptionNote(notesEntity);
         });

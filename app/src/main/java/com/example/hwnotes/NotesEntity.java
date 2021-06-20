@@ -17,6 +17,10 @@ public class NotesEntity implements Parcelable {
         this.description = description;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     protected NotesEntity(Parcel in) {
         title = in.readString();
         description = in.readString();
