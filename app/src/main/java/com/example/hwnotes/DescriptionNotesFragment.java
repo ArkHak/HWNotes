@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class DescriptionNotesFragment extends Fragment {
@@ -16,16 +14,15 @@ public class DescriptionNotesFragment extends Fragment {
     private NotesEntity note = null;
     private TextView titleTv;
     private TextView descriptionTv;
-    private Button saveChangeNoteButton;
 
     public static DescriptionNotesFragment newInstance(NotesEntity notesEntity) {
-        DescriptionNotesFragment descriptionNotesFragment = new DescriptionNotesFragment();
+        DescriptionNotesFragment DescriptionNotesFragment = new DescriptionNotesFragment();
         Bundle args = new Bundle();
 
         args.putParcelable(NOTE_ARGS_KEY, notesEntity);
 
-        descriptionNotesFragment.setArguments(args);
-        return descriptionNotesFragment;
+        DescriptionNotesFragment.setArguments(args);
+        return DescriptionNotesFragment;
     }
 
     public interface Controller {
@@ -37,15 +34,7 @@ public class DescriptionNotesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_description_note, null);
         titleTv = view.findViewById(R.id.title_note);
         descriptionTv = view.findViewById(R.id.description_note);
-        saveChangeNoteButton = view.findViewById(R.id.save_change_note_button);
 
-        saveChangeNoteButton.setOnClickListener(v -> {
-            Controller controller = (Controller) getActivity();
-            controller.saveNote(new NotesEntity(
-                    titleTv.getText().toString(),
-                    descriptionTv.getText().toString()
-            ));
-        });
         return view;
     }
 
