@@ -2,16 +2,22 @@ package com.example.hwnotes;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 public class NotesListFragment extends Fragment {
     private LinearLayout linearLayout;
+    private Button button;
 
     private final NotesEntity note1 = new NotesEntity("Запись 1", "Сделать дз за 6 и 7 урок");
     private final NotesEntity note2 = new NotesEntity("Запись 2", "Что-то для записи 2");
@@ -31,6 +37,32 @@ public class NotesListFragment extends Fragment {
             ((Controller) getActivity()).openDescriptionNote(notesEntity);
         });
         linearLayout.addView(button);
+        registerForContextMenu(button);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        menu.setHeaderTitle("Запись:");
+
+        MenuInflater inflater = new MenuInflater(getActivity().getApplicationContext());
+        inflater.inflate(R.menu.layout_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_menu_open_note:
+                Toast.makeText(getActivity(), "Уже открываю", Toast.LENGTH_SHORT)
+                        .show();
+                return true;
+            case R.id.context_menu_change_note:
+                Toast.makeText(getActivity(), "Давай изменим", Toast.LENGTH_SHORT)
+                        .show();
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
