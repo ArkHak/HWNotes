@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 
 public class NotesListFragment extends Fragment {
     private LinearLayout linearLayout;
-    private Button button;
 
     private final NotesEntity note1 = new NotesEntity("Запись 1", "Сделать дз за 6 и 7 урок");
     private final NotesEntity note2 = new NotesEntity("Запись 2", "Что-то для записи 2");

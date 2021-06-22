@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements DescriptionNotesF
             case R.id.action_settings:
                 Toast.makeText(this, "Открываю настройки", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.action_add:
+                Toast.makeText(this, "Добавляю новую запись", Toast.LENGTH_SHORT).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -3,10 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_add"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_menu_add"
+        android:orderInCategory="100"
+        android:title="Доавить новую запись" />
+
+    <item
         android:id="@+id/action_settings"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_menu_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="80"
         android:title="Настройки" />
 
     <item
